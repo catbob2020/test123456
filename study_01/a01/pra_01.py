@@ -57,5 +57,11 @@
 # app.mainloop()
 # #s.close()
 #
-a= "公告"+input()
-print(a)
+# a= "公告"+input()
+# print(a)
+
+a ='你好呀haha'
+import os
+print(os.getcwd())
+import sys
+print(sys.path)

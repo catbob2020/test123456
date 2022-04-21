@@ -8,6 +8,13 @@ import socket
 import threading
 import time
 import struct
+import pymysql
+# db=pymysql.connect(host = 'localhost',
+#                    user='root',
+#                    password='123456',
+#                    database = 'nba2'
+#                    )
+# cursor = db.cursor()
 
 def recv_message(conn,socket_list):#创建一个收消息的函数
     try:
@@ -42,8 +49,13 @@ def recv_message(conn,socket_list):#创建一个收消息的函数
                 i.send(mstime)
                 # i.send(time.strftime('%X').encode('utf-8'))
                 ms4 = f'{niname}:{recv_data}'.encode('utf-8')
+                print(time.strftime('%X'))
+                t_1=time.strftime('%X')
                 print(f'{niname}:{recv_data}')
                 len4_ms4 = struct.pack('i',len(ms4))
+                # sql1="insert into tb_te1(name_2,class,cla_3) values ('%s','%s','%s')"%(niname,t_1,recv_data)
+                # cursor.execute(sql1)
+                # db.commit()
                 i.send(len4_ms4)
                 i.send(ms4)
         except:
@@ -89,4 +101,4 @@ while True:
     t2 = threading.Thread(target=send_message,args=(conn,))
     t1.start()
     t2.start()
-
+    # db.close()

@@ -8,6 +8,9 @@
 import socket
 import threading
 import time
+
+import pymysql
+
 def recv_message(conn,socket_list):#创建一个收消息的函数
     try:
         nikename = conn.recv(1024).decode('utf-8').strip()
@@ -20,18 +23,29 @@ def recv_message(conn,socket_list):#创建一个收消息的函数
     for i in socket_list:
         i.send(f'\n公告:欢迎{nikename}进入了聊天室........\n'.encode('utf-8'))
     while True:
+        db = pymysql.connect(host='localhost',
+                             user='root',
+                             password='123456',
+                             database='nba2')
+        cursor = db.cursor()
         try:
             recv_data = conn.recv(1024).decode('utf-8')
             print(recv_data)
             for i in socket_list:
                 i.send(time.strftime('%X').encode('utf-8'))
                 i.send(f'{nikename}:{recv_data}'.encode('utf-8'))
+                t_1=time.strftime('%X')
+                print(t_1,nikename,recv_data)
+                sql1="insert into tb_te1(class4,class,cla_3) values ('%s','%s','%s')"%(nikename,t_1,recv_data)
+                cursor.execute(sql1)
+                db.commit()
         except:
             conn.close()#关闭当前客户端的套接字
             socket_list.remove(conn)
             for i in socket_list:
                 i.send(f'公告:{nikename}离开了聊天室......'.encode('utf-8'))
             break
+# db.close()
 def send_message(conn):  #发送消息到公屏上
     while True:
         # msg = input('发送公告：').strip()
@@ -55,10 +69,12 @@ while True:
     print('客户端已接入')
     socket_list.append(conn)
     conn.send('请输入昵称:'.encode('utf-8'))
+    # recv_message(conn, socket_list)
     t1 = threading.Thread(target=recv_message,args=(conn,socket_list))
     t2 = threading.Thread(target=send_message,args=(conn,))
     t1.start()
     t2.start()
+    # db.close()
 
 
 

@@ -48,44 +48,47 @@
 # print (i)
 # cur.close() # 关闭游标
 # conn.close() # 关闭连接
-import sys
-# print('1')
-# exit('再见')
-# print(2)
-
-import pymysql
-
-# 打开数据库连接
-db = pymysql.connect(host='localhost',
-                     user='root',
-                     password='123456',
-                     database='nba2',
-                     # charset='utf-8'
-                     # autocommit=True
-                     )
-
-# 使用 cursor() 方法创建一个游标对象 cursor
-cursor = db.cursor()
-# sq3='show tables'
-# sq1='select * from account'
-# sq2 ='insert into account(id,name,money,messsage) values (null,'li',5000,'hello')'
-# sq3 = 'insert into account(id) VALUES(3) '
-# sq4 = 'insert into account(name) VALUES('jack')'
-# sq4 = '''insert into account(name) VALUES('王五')'''
-# sq4 = '''insert into account(message) VALUES('你好')'''
-# sq4 = '''insert into account(id,message) VALUES(5,'你好好好是的好') '''
-sq5 ='''update account set message='不在' where id =5'''
-
-cursor.execute(sq5)
-db.commit()
-
-# # 使用 fetchone() 方法获取单条数据.
-# data = cursor.fetchone()
-# data = cursor.fetchone()
-# data = cursor.fetchall()
-
-# print("show : %s " % data)
-# for i in data:
-#     print(i)
-# 关闭数据库连接
-db.close()
+# import sys
+# # print('1')
+# # exit('再见')
+# # print(2)
+#
+# import pymysql
+#
+# # 打开数据库连接
+# db = pymysql.connect(host='localhost',
+#                      user='root',
+#                      password='123456',
+#                      database='nba2',
+#                      # charset='utf-8'
+#                      # autocommit=True
+#                      )
+# print('hello')
+#
+# # 使用 cursor() 方法创建一个游标对象 cursor
+# cursor = db.cursor()
+# # sq3='show tables'
+# # sq1='select * from account'
+# # sq2 ='insert into account(id,name,money,messsage) values (null,'li',5000,'hello')'
+# # sq3 = 'insert into account(id) VALUES(3) '
+# # sq4 = 'insert into account(name) VALUES('jack')'
+# # sq4 = '''insert into account(name) VALUES('王五')'''
+# # sq4 = '''insert into account(message) VALUES('你好')'''
+# # sq4 = '''insert into account(id,message) VALUES(5,'你好好好是的好') '''
+# sq5 ='''update account set message='不在' where id =5'''
+#
+# cursor.execute(sq5)
+# db.commit()
+#
+# # # 使用 fetchone() 方法获取单条数据.
+# # data = cursor.fetchone()
+# # data = cursor.fetchone()
+# # data = cursor.fetchall()
+#
+# # print("show : %s " % data)
+# # for i in data:
+# #     print(i)
+# # 关闭数据库连接
+# db.close()
+import os
+print(os.getcwd())
